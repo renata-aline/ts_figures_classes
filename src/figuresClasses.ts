@@ -7,30 +7,17 @@ export interface Figure {
 export class Triangle implements Figure {
   shape = 'triangle';
 
-  color: 'red' | 'green' | 'blue';
-
-  a: number;
-
-  b: number;
-
-  c: number;
-
   constructor(
-    color: 'red' | 'green' | 'blue',
-    a: number,
-    b: number,
-    c: number,
+    public color: 'red' | 'green' | 'blue',
+    private a: number,
+    private b: number,
+    private c: number,
   ) {
     if (a + b <= c || a + c <= b || b + c <= a) {
-      throw new Error('The given sides do not form a valid triangle.');
+      throw new Error(
+        `Invalid triangle sides: a=${a}, b=${b}, c=${c}. The sum of any two sides must be greater than the third side.`,
+      );
     }
-
-    this.color = color;
-    this.a = a;
-
-    this.b = b;
-
-    this.c = c;
   }
 
   getArea(): number {
@@ -47,17 +34,15 @@ export class Triangle implements Figure {
 export class Circle implements Figure {
   shape = 'circle';
 
-  color: 'red' | 'green' | 'blue';
-
-  radius: number;
-
-  constructor(color: 'red' | 'green' | 'blue', radius: number) {
+  constructor(
+    public color: 'red' | 'green' | 'blue',
+    private radius: number,
+  ) {
     if (radius <= 0) {
-      throw new Error('Radius must be greater than zero.');
+      throw new Error(
+        `Invalid radius: ${radius}. Radius must be greater than zero.`,
+      );
     }
-
-    this.color = color;
-    this.radius = radius;
   }
 
   getArea(): number {
@@ -68,22 +53,16 @@ export class Circle implements Figure {
 export class Rectangle implements Figure {
   shape = 'rectangle';
 
-  color: 'red' | 'green' | 'blue';
-
-  width: number;
-
-  height: number;
-
-  constructor(color: 'red' | 'green' | 'blue', width: number, height: number) {
+  constructor(
+    public color: 'red' | 'green' | 'blue',
+    private width: number,
+    private height: number,
+  ) {
     if (width <= 0 || height <= 0) {
-      throw new Error('Width and height must be greater than zero.');
+      throw new Error(
+        `Invalid dimensions: width=${width}, height=${height}. Both width and height must be greater than zero.`,
+      );
     }
-
-    this.color = color;
-
-    this.width = width;
-
-    this.height = height;
   }
 
   getArea(): number {
